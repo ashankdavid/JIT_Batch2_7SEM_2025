@@ -64,6 +64,35 @@ public class SLL {
         }
     }
 
+    void deleteAtHead(){
+        if(head==null){
+            System.out.println("LinkedList is Empty");
+            return;
+        }
+        Node toDelete = head;
+        head = head.next;
+        toDelete = null; // This will call garbeage collection on this toDelete!
+    }
+
+    void deleteByValue(int val){
+        if(head==null) return;
+        if(head.data==val){
+            deleteAtHead();
+            return;
+        }
+        Node temp = head;
+        while(temp.next!=null && temp.next.data!=val){
+            temp = temp.next;
+        }
+        if(temp.next==null){
+            System.out.println("Value was not found to be deleted");
+            return ;
+        }
+        Node todelete = temp.next;
+        temp.next = temp.next.next;
+        todelete = null; // Garbage collection!!
+    }
+
     void printLL(){
         Node temp = head;
         while(temp!=null){
@@ -87,6 +116,10 @@ class DriverCode{
         sll.insertAtTail(200);
         sll.printLL();
         sll.insertAtPos(1000, 3);
+        sll.printLL();
+        sll.deleteAtHead();
+        sll.printLL();
+        sll.deleteByValue(500);
         sll.printLL();
     }
 }
