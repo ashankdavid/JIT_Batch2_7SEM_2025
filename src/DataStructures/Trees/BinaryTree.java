@@ -17,6 +17,15 @@ public class BinaryTree {
         return new Node(val);
     }
 
+    static void dfs(Node root){
+        if(root==null){
+            return ;
+        }
+        dfs(root.left);
+        dfs(root.right);
+        System.out.print(root.data + " ");
+    }
+
     public static void main(String[] args) {
 
         Node root =  createNode(1); // root level
@@ -32,6 +41,8 @@ public class BinaryTree {
         root.left.right.left = createNode(8); // level 4
         root.right.left.left = createNode(15);
         root.right.left.right = createNode(9);
+
+        dfs(root);
 
     }
 }
