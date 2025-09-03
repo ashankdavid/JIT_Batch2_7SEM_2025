@@ -1,0 +1,62 @@
+public class Stacks {
+    char[] arr;
+    int top;
+    int size;
+
+    Stacks(int size){
+        this.size = size;
+        arr = new char[size];  // arr = (int)malloc(sizeof(int))
+        top = -1;
+    }
+
+    void push(char val){
+        if(top==size-1){
+            System.out.println("Overflow");
+            return ;
+        }
+        top++;
+        arr[top] = val;
+    }
+
+    char pop(){
+        if(top==-1){
+            System.out.println("Underflow");
+            return '\0';
+        }
+        return arr[top--];
+    }
+
+    char Top(){
+        if(top==-1){
+            System.out.println("Underflow");
+            return '\0';
+        }
+        return arr[top];
+    }
+
+    boolean isEmpty(){
+        return top==-1;
+    }
+}
+
+class Solution {
+    public boolean isValid(String s) {
+        Stacks st = new Stacks(s.length());
+
+        for(char c : s.toCharArray()){
+            if(c == '(' || c=='{' || c=='['){
+                st.push(c);
+            }else{
+                if(st.isEmpty()) return false;
+
+                char top = st.pop();
+                if(c==')' && top!='(' ||
+                   c=='}' && top!='{' ||
+                   c==']' && top!='['){
+                    return false;
+                }
+            }
+        }
+        return st.isEmpty();
+    }
+}
