@@ -1,4 +1,7 @@
-package DataStructures.Trees;
+package DataStructures.Trees.BinaryTrees;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 class Node{
     int data;
@@ -26,6 +29,21 @@ public class BinaryTree {
         System.out.print(root.data + " ");
     }
 
+    static void bfs(Node root){
+        Queue<Node> q = new LinkedList<>();
+        q.offer(root);
+        while(!q.isEmpty()){
+            Node temp = q.poll();
+            System.out.print(temp.data + " ");
+            if(temp.left!=null){
+                q.offer(temp.left);
+            }
+            if(temp.right!=null){
+                q.offer(temp.right);
+            }
+        }
+    }
+
     public static void main(String[] args) {
 
         Node root =  createNode(1); // root level
@@ -42,7 +60,7 @@ public class BinaryTree {
         root.right.left.left = createNode(15);
         root.right.left.right = createNode(9);
 
-        dfs(root);
+        bfs(root);
 
     }
 }
